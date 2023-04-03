@@ -11,6 +11,7 @@ const AuthRoute = require("./User/routes/AuthRoute.js");
 const SettingRoute = require("./Setting/routes/SettingRoute.js");
 const GroupStokRoute = require("./Master/routes/GroupStok/GroupStokRoute.js");
 const StokRoute = require("./Master/routes/Stok/StokRoute.js");
+const PerubahanRoute = require("./Master/routes/Perubahan/PerubahanRoute.js");
 
 const app = express();
 app.use(cors());
@@ -23,5 +24,6 @@ app.use(CabangRoute);
 app.use(SettingRoute);
 app.use(GroupStokRoute);
 app.use(StokRoute);
+app.use(PerubahanRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
