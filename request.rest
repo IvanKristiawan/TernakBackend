@@ -1,0 +1,86 @@
+### Register
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+    "username":"MANAGER",
+    "password": "MGR",
+    "tipeUser": "MANAGER",
+    "cabangId": "001",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}
+
+### Login
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "username":"MANAGER",
+    "password": "MGR"
+}
+
+### Get All User
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}
+
+### Save Hak Akses 
+POST http://localhost:5000/saveHakAkses
+Content-Type: application/json
+
+{
+      "stok": true,
+      "perubahan": true,
+      "supplier": true,
+      "customer": true,
+      "cabang": true,
+
+      "pembelian": true,
+      "penjualan": true,
+
+      "lapPembelian": true,
+      "lapPenjualan": true,
+      "lapStok": true,
+      "lapPerubahanStok": true,
+      "lapLabaRugi": true,
+
+      "profilUser": true,
+      "daftarUser": true,
+      "setting": true,
+    "userId": 1,
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}
+
+### Save Cabang
+POST http://localhost:5000/saveCabang
+Content-Type: application/json
+
+{
+    "namaCabang":"CABANG A",
+    "alamatCabang": "JL. A",
+    "teleponCabang": "089343243",
+    "picCabang": "BUDI",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}
+
+### Save Setting
+POST http://localhost:5000/saveSetting
+Content-Type: application/json
+
+{
+    "namaProgram": "TechKu",
+    "namaPerusahaan": "Ternak Lele",
+    "alamatPerusahaan": "Kembang Putihan",
+    "kotaPerusahaan": "Bantul",
+    "provinsiPerusahaan": "Yogyakarta",
+    "kodeCabang": "001",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}
