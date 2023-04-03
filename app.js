@@ -12,6 +12,7 @@ const SettingRoute = require("./Setting/routes/SettingRoute.js");
 const GroupStokRoute = require("./Master/routes/GroupStok/GroupStokRoute.js");
 const StokRoute = require("./Master/routes/Stok/StokRoute.js");
 const PerubahanRoute = require("./Master/routes/Perubahan/PerubahanRoute.js");
+const SupplierRoute = require("./Master/routes/Supplier/SupplierRoute.js");
 
 const app = express();
 app.use(cors());
@@ -25,5 +26,6 @@ app.use(SettingRoute);
 app.use(GroupStokRoute);
 app.use(StokRoute);
 app.use(PerubahanRoute);
+app.use(SupplierRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
