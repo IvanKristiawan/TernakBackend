@@ -6,11 +6,6 @@ const { DataTypes } = Sequelize;
 const GroupStok = db.define(
   "groupstoks",
   {
-    id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-      allowNull: false,
-    },
     kodeGroupStok: {
       type: DataTypes.STRING,
       allowNull: false,

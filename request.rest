@@ -84,3 +84,12 @@ Content-Type: application/json
     "_id": 1,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
 }
+
+### Get All Stok
+POST http://localhost:5000/stoks
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}
