@@ -1,121 +1,108 @@
-const Beli = require("../../../models/Pembelian/Beli/BeliModel.js");
-const BeliChild = require("../../../models/Pembelian/BeliChild/BeliChildModel.js");
+const Jual = require("../../../models/Penjualan/Jual/JualModel.js");
+const JualChild = require("../../../models/Penjualan/JualChild/JualChildModel.js");
 const Stok = require("../../../../Master/models/Stok/StokModel.js");
-const Supplier = require("../../../../Master/models/Supplier/SupplierModel.js");
 const Cabang = require("../../../../Master/models/Cabang/CabangModel.js");
 const { findNextKode, formatDate } = require("../../../../helper/helper");
 const { Sequelize } = require("sequelize");
 const Op = Sequelize.Op;
 
-const getBelis = async (req, res) => {
+const getJuals = async (req, res) => {
   try {
-    let tempAllBeli = [];
-    const belis = await Beli.findAll({
+    let tempAllJual = [];
+    const juals = await Jual.findAll({
       where: {
         cabangId: req.body.kodeCabang,
         [Op.and]: [
           {
-            tanggalBeli: {
+            tanggalJual: {
               [Op.gte]: new Date(req.body.dariTanggal),
             },
           },
           {
-            tanggalBeli: {
+            tanggalJual: {
               [Op.lte]: new Date(req.body.sampaiTanggal),
             },
           },
         ],
       },
-      include: [{ model: Supplier }, { model: Cabang }],
-      order: [["noNotaBeli", "DESC"]],
+      include: [{ model: Cabang }],
+      order: [["noNotaJual", "DESC"]],
     });
 
     // Formatting date and Parsing json from string data
-    for (let element of belis) {
+    for (let element of juals) {
       let objectBeli = {
         ...element.dataValues,
-        tanggalBeli: formatDate(element.dataValues.tanggalBeli),
+        tanggalJual: formatDate(element.dataValues.tanggalJual),
       };
-      tempAllBeli.push(objectBeli);
+      tempAllJual.push(objectBeli);
     }
 
-    res.status(200).json(tempAllBeli);
+    res.status(200).json(tempAllJual);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
   }
 };
 
-const getBeliNextKode = async (req, res) => {
+const getJualNextKode = async (req, res) => {
   try {
-    const belis = await Beli.findAll({});
-    let nextKodeBeli = findNextKode(belis.length, 8);
-    res.status(200).json(nextKodeBeli);
+    const juals = await Jual.findAll({});
+    let nextKodeJual = findNextKode(juals.length, 8);
+    res.status(200).json(nextKodeJual);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
   }
 };
 
-const getBeliById = async (req, res) => {
+const getJualById = async (req, res) => {
   try {
-    const beli = await Beli.findOne({
+    const jual = await Jual.findOne({
       where: {
         id: req.params.id,
       },
-      include: [{ model: Supplier }, { model: Cabang }],
+      include: [{ model: Cabang }],
     });
-    res.status(200).json(beli);
+    res.status(200).json(jual);
   } catch (error) {
     // Error 404 = Not Found
     res.status(404).json({ message: error.message });
   }
 };
 
-const saveBeli = async (req, res) => {
+const saveJual = async (req, res) => {
   Object.keys(req.body).forEach(function (k) {
     if (typeof req.body[k] == "string") {
       req.body[k] = req.body[k].toUpperCase().trim();
     }
   });
-  let suppliers = await Supplier.findOne({
-    where: {
-      kodeSupplier: req.body.kodeSupplier,
-    },
-  });
-  const belis = await Beli.findAll({});
-  let nextKodeBeli = findNextKode(belis.length, 8);
+  const juals = await Jual.findAll({});
+  let nextKodeJual = findNextKode(juals.length, 8);
   try {
-    const insertedBeli = await Beli.create({
-      noNotaBeli: nextKodeBeli,
-      supplierId: suppliers.id,
-      totalBeli: 0,
+    const insertedJual = await Jual.create({
+      noNotaJual: nextKodeJual,
+      totalJual: 0,
       cabangId: req.body.kodeCabang,
       ...req.body,
     });
     // Status 201 = Created
-    res.status(201).json(insertedBeli);
+    res.status(201).json(insertedJual);
   } catch (error) {
     // Error 400 = Kesalahan dari sisi user
     res.status(400).json({ message: error.message });
   }
 };
 
-const updateBeli = async (req, res) => {
+const updateJual = async (req, res) => {
   Object.keys(req.body).forEach(function (k) {
     if (typeof req.body[k] == "string") {
       req.body[k] = req.body[k].toUpperCase().trim();
     }
   });
-  let suppliers = await Supplier.findOne({
-    where: {
-      kodeSupplier: req.body.kodeSupplier,
-    },
-  });
   try {
-    await Beli.update(
+    await Jual.update(
       {
-        supplierId: suppliers.id,
         cabangId: req.body.kodeCabang,
         ...req.body,
       },
@@ -127,9 +114,9 @@ const updateBeli = async (req, res) => {
     ).then((num) => {
       // num come from numbers of updated data
       if (num == 1) {
-        res.status(200).json({ message: "Beli Updated!" });
+        res.status(200).json({ message: "Jual Updated!" });
       } else {
-        res.status(400).json({ message: `Beli ${req.params.id} not found!` });
+        res.status(400).json({ message: `Jual ${req.params.id} not found!` });
       }
     });
   } catch (error) {
@@ -138,22 +125,22 @@ const updateBeli = async (req, res) => {
   }
 };
 
-const deleteBeli = async (req, res) => {
+const deleteJual = async (req, res) => {
   try {
-    const beliChilds = await BeliChild.findAll({
+    const jualChilds = await JualChild.findAll({
       where: {
-        beliId: req.params.id,
+        jualId: req.params.id,
       },
       include: [{ model: Stok }],
     });
-    for (let beliChild of beliChilds) {
+    for (let jualChild of jualChilds) {
       let stoks = await Stok.findOne({
         where: {
-          kodeStok: beliChild.stok.kodeStok,
+          kodeStok: jualChild.stok.kodeStok,
         },
       });
       let tempQty =
-        parseInt(stoks.dataValues.qtyStok) - parseInt(beliChild.qtyBeliChild);
+        parseInt(stoks.dataValues.qtyStok) + parseInt(jualChild.qtyJualChild);
       await Stok.update(
         {
           ...req.body,
@@ -161,27 +148,27 @@ const deleteBeli = async (req, res) => {
         },
         {
           where: {
-            kodeStok: beliChild.stok.kodeStok,
+            kodeStok: jualChild.stok.kodeStok,
           },
         }
       );
 
-      await BeliChild.destroy({
+      await JualChild.destroy({
         where: {
-          id: beliChild.id,
+          id: jualChild.id,
         },
       });
     }
-    await Beli.destroy({
+    await Jual.destroy({
       where: {
         id: req.params.id,
       },
     }).then((num) => {
       // num come from numbers of updated data
       if (num == 1) {
-        res.status(200).json({ message: "Beli Deleted!" });
+        res.status(200).json({ message: "Jual Deleted!" });
       } else {
-        res.status(400).json({ message: `Beli ${req.params.id} not found!` });
+        res.status(400).json({ message: `Jual ${req.params.id} not found!` });
       }
     });
   } catch (error) {
@@ -191,10 +178,10 @@ const deleteBeli = async (req, res) => {
 };
 
 module.exports = {
-  getBelis,
-  getBeliNextKode,
-  getBeliById,
-  saveBeli,
-  updateBeli,
-  deleteBeli,
+  getJuals,
+  getJualNextKode,
+  getJualById,
+  saveJual,
+  updateJual,
+  deleteJual,
 };
