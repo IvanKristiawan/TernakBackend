@@ -7,6 +7,10 @@ const { DataTypes } = Sequelize;
 const Stok = db.define(
   "stoks",
   {
+    kodeStok: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     namaStok: {
       type: DataTypes.STRING,
       allowNull: false,

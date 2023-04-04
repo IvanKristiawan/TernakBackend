@@ -5,7 +5,7 @@ const getStoks = async (req, res) => {
   try {
     const stoks = await Stok.findAll({
       include: [{ model: GroupStok }],
-      order: [["namaStok", "DESC"]],
+      order: [["kodeStok", "ASC"]],
     });
     res.status(200).json(stoks);
   } catch (error) {
@@ -59,12 +59,12 @@ const saveStok = async (req, res) => {
     // Find if Nama Stok already exist
     const stok = await Stok.findOne({
       where: {
-        namaStok: req.body.namaStok,
+        kodeStok: req.body.kodeStok,
       },
     });
-    let namaStokExist = stok;
-    if (namaStokExist) {
-      res.status(400).json({ message: "Nama Stok Sudah Ada!" });
+    let kodeStokExist = stok;
+    if (kodeStokExist) {
+      res.status(400).json({ message: "Kode Stok Sudah Ada!" });
     } else {
       const insertedStok = await Stok.create({
         groupStokId: groupStoks.id,
@@ -94,13 +94,13 @@ const updateStok = async (req, res) => {
     // Find if Nama Stok already exist and not current one
     const stok = await Stok.findOne({
       where: {
-        namaStok: req.body.namaStok,
+        kodeStok: req.body.kodeStok,
       },
     });
-    let namaStokExist =
-      stok && stok.dataValues.namaJenis !== req.body.namaJenisLama;
-    if (namaStokExist) {
-      res.status(400).json({ message: "Nama Stok Sudah Ada!" });
+    let kodeStokExist =
+      stok && stok.dataValues.kodeStok !== req.body.kodeStokLama;
+    if (kodeStokExist) {
+      res.status(400).json({ message: "Kode Stok Sudah Ada!" });
     } else {
       await Stok.update(
         {

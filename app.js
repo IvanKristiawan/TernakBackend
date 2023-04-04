@@ -15,6 +15,8 @@ const StokRoute = require("./Master/routes/Stok/StokRoute.js");
 const PerubahanRoute = require("./Master/routes/Perubahan/PerubahanRoute.js");
 const SupplierRoute = require("./Master/routes/Supplier/SupplierRoute.js");
 const CustomerRoute = require("./Master/routes/Customer/CustomerRoute.js");
+const BeliRoute = require("./Transaksi/routes/Pembelian/Beli/BeliRoute.js");
+const BeliChildRoute = require("./Transaksi/routes/Pembelian/BeliChild/BeliChildRoute.js");
 
 const app = express();
 app.use(cors());
@@ -31,5 +33,7 @@ app.use(StokRoute);
 app.use(PerubahanRoute);
 app.use(SupplierRoute);
 app.use(CustomerRoute);
+app.use(BeliRoute);
+app.use(BeliChildRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
