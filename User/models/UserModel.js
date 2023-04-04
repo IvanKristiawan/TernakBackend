@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const db = require("../../config/Database.js");
 const Cabang = require("../../Master/models/Cabang/CabangModel.js");
+const TutupPeriode = require("../../Accounting/TutupPeriode/models/TutupPeriodeModel.js");
 
 const { DataTypes } = Sequelize;
 
@@ -20,6 +21,12 @@ const User = db.define(
       default: "ADMIN", // ADMIN, MANAGER, OWNER
       allowNull: true,
     },
+    // Foreign Key Tutup Periode
+    periodeId: {
+      type: DataTypes.INTEGER,
+      default: 1,
+      allowNull: false,
+    },
 
     // Foreign Key Cabang
     cabangId: {
@@ -35,6 +42,11 @@ const User = db.define(
 
 User.belongsTo(Cabang, {
   foreignKey: "cabangId",
+  targetKey: "id",
+});
+
+User.belongsTo(TutupPeriode, {
+  foreignKey: "periodeId",
   targetKey: "id",
 });
 

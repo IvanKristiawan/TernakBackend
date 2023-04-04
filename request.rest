@@ -93,3 +93,16 @@ Content-Type: application/json
     "_id": 1,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
 }
+
+### Get Save Tutup Periode
+POST http://localhost:5000/saveTutupPeriode
+Content-Type: application/json
+
+{
+    "namaPeriode": "SEPTEMBER 2022",
+    "dariTanggal": "2022-09-01",
+    "sampaiTanggal": "2022-09-30",
+    "kodeCabang": "001",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}

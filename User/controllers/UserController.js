@@ -1,6 +1,7 @@
 const User = require("../models/UserModel.js");
 const HakAkses = require("../models/HakAkses/HakAksesModel.js");
 const Cabang = require("../../Master/models/Cabang/CabangModel.js");
+const TutupPeriode = require("../../Accounting/TutupPeriode/models/TutupPeriodeModel.js");
 const jwt = require("jsonwebtoken");
 
 const updateUser = async (req, res) => {
@@ -22,12 +23,22 @@ const updateUser = async (req, res) => {
     } else {
       tempPassword = findUser.password;
     }
+    let periode;
+    if (req.body.namaPeriode) {
+      periode = await TutupPeriode.findOne({
+        where: {
+          namaPeriode: req.body.namaPeriode,
+        },
+      });
+      periode = periode.id;
+    }
 
     await User.update(
       {
         username: req.body.username,
         password: tempPassword,
         tipeUser: req.body.tipeUser,
+        periodeId: periode,
         cabangId: req.body.cabangId,
       },
       {
@@ -50,7 +61,7 @@ const updateUser = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
 
     const hakAkses = await HakAkses.findOne({
@@ -85,14 +96,22 @@ const updateUserThenLogin = async (req, res) => {
     } else {
       tempPassword = findUser.password;
     }
+    if (req.body.namaPeriode) {
+      periode = await TutupPeriode.findOne({
+        where: {
+          namaPeriode: req.body.namaPeriode,
+        },
+      });
+      periode = periode.id;
+    }
 
     await User.update(
       {
         username: req.body.username,
         password: tempPassword,
         tipeUser: req.body.tipeUser,
+        periodeId: periode,
         cabangId: req.body.cabangId,
-        akses: JSON.stringify(req.body.akses),
       },
       {
         where: {
@@ -114,7 +133,7 @@ const updateUserThenLogin = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
 
     const hakAkses = await HakAkses.findOne({
@@ -173,7 +192,7 @@ const getUser = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
     const hakAkses = await HakAkses.findOne({
       where: {
@@ -195,7 +214,7 @@ const getUsers = async (req, res) => {
   try {
     let tempAllUser = [];
     const users = await User.findAll({
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
 
     for (let user of users) {
@@ -226,7 +245,7 @@ const getUsername = async (req, res) => {
       where: {
         username: req.body.username,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
 
     for (let user of users) {
@@ -258,7 +277,7 @@ const getKodeKwitansi = async (req, res) => {
         kodeKwitansi: req.body.kodeKwitansi,
         cabangId: req.body.kodeCabang,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
 
     for (let user of users) {
@@ -289,7 +308,7 @@ const getUsersPerCabang = async (req, res) => {
       where: {
         cabangId: req.body.kodeCabang,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Cabang }, { model: TutupPeriode }],
     });
 
     for (let user of users) {

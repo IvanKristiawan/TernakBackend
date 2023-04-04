@@ -89,6 +89,16 @@ const HakAkses = db.define(
       defaultValue: false,
       allowNull: false,
     },
+    gantiPeriode: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    tutupPeriode: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
 
     // Foreign Key Cabang
     userId: {
