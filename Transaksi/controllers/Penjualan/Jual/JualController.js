@@ -26,7 +26,7 @@ const getJuals = async (req, res) => {
         ],
       },
       include: [{ model: Cabang }],
-      order: [["noNotaJual", "DESC"]],
+      order: [["noNotaJual", "ASC"]],
     });
 
     // Formatting date and Parsing json from string data

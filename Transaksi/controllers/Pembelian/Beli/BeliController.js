@@ -27,7 +27,7 @@ const getBelis = async (req, res) => {
         ],
       },
       include: [{ model: Supplier }, { model: Cabang }],
-      order: [["noNotaBeli", "DESC"]],
+      order: [["noNotaBeli", "ASC"]],
     });
 
     // Formatting date and Parsing json from string data
