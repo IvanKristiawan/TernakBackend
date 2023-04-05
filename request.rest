@@ -135,3 +135,15 @@ Content-Type: application/json
     "_id": 1,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
 }
+
+### Get Laporan Laba Rugi
+POST http://localhost:5000/laporanLabaRugi
+Content-Type: application/json
+
+{
+    "dariTanggal": "2023-01-01",
+    "sampaiTanggal": "2023-04-01",
+    "kodeCabang": "001",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}

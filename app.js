@@ -21,6 +21,7 @@ const JualRoute = require("./Transaksi/routes/Penjualan/Jual/JualRoute.js");
 const JualChildRoute = require("./Transaksi/routes/Penjualan/JualChild/JualChildRoute.js");
 const LaporanPembelianRoute = require("./Laporan/routes/LaporanPembelian/LaporanPembelianRoute.js");
 const LaporanPenjualanRoute = require("./Laporan/routes/LaporanPenjualan/LaporanPenjualanRoute.js");
+const LabaRugiRoute = require("./Laporan/routes/LabaRugi/LabaRugiRoute.js");
 
 const app = express();
 app.use(cors());
@@ -43,5 +44,6 @@ app.use(JualRoute);
 app.use(JualChildRoute);
 app.use(LaporanPembelianRoute);
 app.use(LaporanPenjualanRoute);
+app.use(LabaRugiRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
