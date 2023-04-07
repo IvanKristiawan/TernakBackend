@@ -32,6 +32,11 @@ const Setting = db.define(
       defaultValue: "",
       allowNull: true,
     },
+    teleponPerusahaan: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+      allowNull: true,
+    },
 
     // Foreign Key Cabang
     cabangId: {
