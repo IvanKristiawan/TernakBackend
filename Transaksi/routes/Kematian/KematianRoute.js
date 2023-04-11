@@ -10,8 +10,8 @@ const verifyUser = verify.verifyUser;
 
 const router = express.Router();
 
-router.post("/belisChild", verifyUser, getKematians);
-router.post("/belisChild/:id", verifyUser, getKematianById);
+router.post("/kematians", verifyUser, getKematians);
+router.post("/kematians/:id", verifyUser, getKematianById);
 router.post("/saveKematian", verifyUser, saveKematian);
 router.post("/updateKematian/:id", verifyUser, updateKematian);
 router.post("/deleteKematian/:id", verifyUser, deleteKematian);

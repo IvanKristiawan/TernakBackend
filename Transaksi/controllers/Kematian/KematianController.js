@@ -34,7 +34,7 @@ const getKematians = async (req, res) => {
         for (let element of kematians) {
             let objectKematian = {
                 ...element.dataValues,
-                tanggalKematian: formatDate(element.dataValues.tanggalBeli),
+                tanggalKematian: formatDate(element.dataValues.tanggalKematian),
             };
             tempAllKematian.push(objectKematian);
         }
