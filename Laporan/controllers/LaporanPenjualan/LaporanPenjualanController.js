@@ -1,6 +1,7 @@
 const Jual = require("../../../Transaksi/models/Penjualan/Jual/JualModel");
 const JualChild = require("../../../Transaksi/models/Penjualan/JualChild/JualChildModel.js");
 const Stok = require("../../../Master/models/Stok/StokModel.js");
+const Customer = require("../../../Master/models/Customer/CustomerModel.js");
 const Cabang = require("../../../Master/models/Cabang/CabangModel.js");
 const { formatDate } = require("../../../helper/helper");
 const { Sequelize } = require("sequelize");
@@ -23,14 +24,23 @@ const getLaporanPenjualan = async (req, res) => {
         },
       ],
     };
-    let includeClause = [{ model: Jual }, { model: Stok }, { model: Cabang }];
+    let includeClause = [{ model: Jual }, { model: Stok }, { model: Cabang }, { model: Customer },];
 
+    let isStokAndCustomerExist = req.body.kodeStok && req.body.customerId;
     let isStokExist = req.body.kodeStok;
+    let isCustomerExist = req.body.customerId;
 
-    if (isStokExist) {
+    if (isStokAndCustomerExist) {
       includeClause[1]["where"] = {
         kodeStok: req.body.kodeStok,
       };
+      whereClause["customerId"] = req.body.customerId;
+    } else if (isStokExist) {
+      includeClause[1]["where"] = {
+        kodeStok: req.body.kodeStok,
+      };
+    } else if (isCustomerExist) {
+      whereClause["customerId"] = req.body.customerId;
     }
 
     let isCabangExist = req.body.kodeCabang;

@@ -2,6 +2,7 @@ const { Sequelize } = require("sequelize");
 const db = require("../../../../config/Database.js");
 const Jual = require("../../../models/Penjualan/Jual/JualModel.js");
 const Stok = require("../../../../Master/models/Stok/StokModel.js");
+const Customer = require("../../../../Master/models/Customer/CustomerModel.js");
 const Cabang = require("../../../../Master/models/Cabang/CabangModel.js");
 
 const { DataTypes } = Sequelize;
@@ -52,6 +53,12 @@ const JualChild = db.define(
       default: 1,
       allowNull: false,
     },
+    // Foreign Key Customer
+    customerId: {
+      type: DataTypes.INTEGER,
+      default: 1,
+      allowNull: false,
+    },
     // Foreign Key Jual
     jualId: {
       type: DataTypes.INTEGER,
@@ -77,6 +84,11 @@ JualChild.belongsTo(Stok, {
 
 JualChild.belongsTo(Jual, {
   foreignKey: "jualId",
+  targetKey: "id",
+});
+
+JualChild.belongsTo(Customer, {
+  foreignKey: "customerId",
   targetKey: "id",
 });
 
