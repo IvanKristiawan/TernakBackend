@@ -31,8 +31,8 @@ const getLaporanPembelian = async (req, res) => {
       { model: Cabang },
     ];
 
-    let isStokAndSupplierExist = req.body.stokId && req.body.supplierId;
-    let isStokExist = req.body.stokId;
+    let isStokAndSupplierExist = req.body.kodeStok && req.body.supplierId;
+    let isStokExist = req.body.kodeStok;
     let isSupplierExist = req.body.supplierId;
 
     if (isStokAndSupplierExist) {

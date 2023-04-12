@@ -147,3 +147,17 @@ Content-Type: application/json
     "_id": 1,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
 }
+
+### Get Laporan Kematian
+POST http://localhost:5000/laporanKematian
+Content-Type: application/json
+
+{
+    "kodeStok": "LL1",
+    "grouping": "STOK",
+    "dariTanggal": "2022-01-01",
+    "sampaiTanggal": "2023-04-01",
+    "kodeCabang": "001",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNDg4NjcxLCJleHAiOjE2ODE3ODQ2NzF9.Gg7cBqhNm0EJP3Ukz9aN94YB-Pk2W_Hfxjy7HBAfO-M"
+}

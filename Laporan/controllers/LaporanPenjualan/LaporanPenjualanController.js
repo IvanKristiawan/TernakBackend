@@ -25,7 +25,7 @@ const getLaporanPenjualan = async (req, res) => {
     };
     let includeClause = [{ model: Jual }, { model: Stok }, { model: Cabang }];
 
-    let isStokExist = req.body.stokId;
+    let isStokExist = req.body.kodeStok;
 
     if (isStokExist) {
       includeClause[1]["where"] = {

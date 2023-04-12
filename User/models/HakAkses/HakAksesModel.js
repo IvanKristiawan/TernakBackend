@@ -72,6 +72,11 @@ const HakAkses = db.define(
       defaultValue: false,
       allowNull: false,
     },
+    lapKematian: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
 
     // UTILITY
     profilUser: {
