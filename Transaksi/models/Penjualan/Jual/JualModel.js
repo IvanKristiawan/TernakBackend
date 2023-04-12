@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const db = require("../../../../config/Database.js");
+const Customer = require("../../../../Master/models/Customer/CustomerModel.js");
 const Cabang = require("../../../../Master/models/Cabang/CabangModel.js");
 
 const { DataTypes } = Sequelize;
@@ -38,6 +39,12 @@ const Jual = db.define(
       allowNull: false,
     },
 
+    // Foreign Key Customer
+    customerId: {
+      type: DataTypes.INTEGER,
+      default: 1,
+      allowNull: false,
+    },
     // Foreign Key Cabang
     cabangId: {
       type: DataTypes.STRING,
@@ -52,6 +59,11 @@ const Jual = db.define(
 
 Jual.belongsTo(Cabang, {
   foreignKey: "cabangId",
+  targetKey: "id",
+});
+
+Jual.belongsTo(Customer, {
+  foreignKey: "customerId",
   targetKey: "id",
 });
 

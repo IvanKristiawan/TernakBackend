@@ -144,7 +144,7 @@ const deleteBeli = async (req, res) => {
       where: {
         beliId: req.params.id,
       },
-      include: [{ model: Stok }],
+      include: [{ model: Stok }, { model: Cabang }],
     });
     for (let beliChild of beliChilds) {
       let stoks = await Stok.findOne({

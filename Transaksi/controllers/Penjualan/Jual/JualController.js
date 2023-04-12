@@ -1,6 +1,7 @@
 const Jual = require("../../../models/Penjualan/Jual/JualModel.js");
 const JualChild = require("../../../models/Penjualan/JualChild/JualChildModel.js");
 const Stok = require("../../../../Master/models/Stok/StokModel.js");
+const Customer = require("../../../../Master/models/Customer/CustomerModel.js");
 const Cabang = require("../../../../Master/models/Cabang/CabangModel.js");
 const { findNextKode, formatDate } = require("../../../../helper/helper");
 const { Sequelize } = require("sequelize");
@@ -25,7 +26,7 @@ const getJuals = async (req, res) => {
           },
         ],
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Customer }, { model: Cabang }],
       order: [["noNotaJual", "ASC"]],
     });
 
@@ -62,7 +63,7 @@ const getJualById = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: Cabang }],
+      include: [{ model: Customer }, { model: Cabang }],
     });
     res.status(200).json(jual);
   } catch (error) {
@@ -79,9 +80,16 @@ const saveJual = async (req, res) => {
   });
   const juals = await Jual.findAll({});
   let nextKodeJual = findNextKode(juals.length, 8);
+
+  let customers = await Customer.findOne({
+    where: {
+      kodeCustomer: req.body.kodeCustomer,
+    },
+  });
   try {
     const insertedJual = await Jual.create({
       noNotaJual: nextKodeJual,
+      customerId: customers.id,
       totalJual: 0,
       cabangId: req.body.kodeCabang,
       ...req.body,
@@ -100,9 +108,15 @@ const updateJual = async (req, res) => {
       req.body[k] = req.body[k].toUpperCase().trim();
     }
   });
+  let customers = await Customer.findOne({
+    where: {
+      kodeCustomer: req.body.kodeCustomer,
+    },
+  });
   try {
     await Jual.update(
       {
+        customerId: customers.id,
         cabangId: req.body.kodeCabang,
         ...req.body,
       },
@@ -131,7 +145,7 @@ const deleteJual = async (req, res) => {
       where: {
         jualId: req.params.id,
       },
-      include: [{ model: Stok }],
+      include: [{ model: Stok }, { model: Cabang }],
     });
     for (let jualChild of jualChilds) {
       let stoks = await Stok.findOne({
