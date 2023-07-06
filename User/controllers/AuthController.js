@@ -1,6 +1,5 @@
 const User = require("../models/UserModel.js");
 const HakAkses = require("../models/HakAkses/HakAksesModel.js");
-const TutupPeriode = require("../../Accounting/TutupPeriode/models/TutupPeriodeModel.js");
 const Cabang = require("../../Master/models/Cabang/CabangModel.js");
 const { createError } = require("../../utils/error.js");
 const jwt = require("jsonwebtoken");
@@ -12,17 +11,11 @@ const register = async (req, res) => {
         req.body[k] = req.body[k].toUpperCase().trim();
       }
     });
-    const periode = await TutupPeriode.findOne({
-      where: {
-        namaPeriode: req.body.namaPeriode,
-      },
-    });
 
     const newUser = await User.create({
       username: req.body.username,
       password: req.body.password,
       tipeUser: req.body.tipeUser,
-      periodeId: periode.id,
       cabangId: req.body.cabangId,
     });
 
@@ -44,7 +37,7 @@ const login = async (req, res, next) => {
       where: {
         username: req.body.username,
       },
-      include: [{ model: Cabang }, { model: TutupPeriode }],
+      include: [{ model: Cabang }],
     });
     if (!user) return next(createError(404, "User not found!"));
 

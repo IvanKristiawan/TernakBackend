@@ -13,18 +13,6 @@ const getJuals = async (req, res) => {
     const juals = await Jual.findAll({
       where: {
         cabangId: req.body.kodeCabang,
-        [Op.and]: [
-          {
-            tanggalJual: {
-              [Op.gte]: new Date(req.body.dariTanggal),
-            },
-          },
-          {
-            tanggalJual: {
-              [Op.lte]: new Date(req.body.sampaiTanggal),
-            },
-          },
-        ],
       },
       include: [{ model: Customer }, { model: Cabang }],
       order: [["noNotaJual", "ASC"]],

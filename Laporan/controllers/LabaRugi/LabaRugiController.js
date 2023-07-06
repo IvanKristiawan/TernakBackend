@@ -10,6 +10,7 @@ const Op = Sequelize.Op;
 
 const getLaporanLabaRugi = async (req, res) => {
   try {
+    let jualChilds;
     let beliChilds = await BeliChild.findAll({
       where: {
         cabangId: req.body.kodeCabang,

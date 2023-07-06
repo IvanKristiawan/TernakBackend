@@ -12,18 +12,6 @@ const getJualChilds = async (req, res) => {
     const jualChilds = await JualChild.findAll({
       where: {
         cabangId: req.body.kodeCabang,
-        [Op.and]: [
-          {
-            tanggalJual: {
-              [Op.gte]: new Date(req.body.dariTanggal),
-            },
-          },
-          {
-            tanggalJual: {
-              [Op.lte]: new Date(req.body.sampaiTanggal),
-            },
-          },
-        ],
       },
       include: [{ model: Jual }, { model: Stok }, { model: Cabang }],
     });

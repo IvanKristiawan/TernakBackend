@@ -4,6 +4,8 @@ const { Sequelize } = require("sequelize");
 const db = new Sequelize("ternak_lele", "root", "", {
   host: "localhost",
   dialect: "mysql",
+  operatorsAliases: "false",
+  logging: false,
 });
 
 // Akun MySql Hosting

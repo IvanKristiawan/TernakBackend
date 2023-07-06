@@ -13,18 +13,6 @@ const getBeliChilds = async (req, res) => {
     const beliChilds = await BeliChild.findAll({
       where: {
         cabangId: req.body.kodeCabang,
-        [Op.and]: [
-          {
-            tanggalBeli: {
-              [Op.gte]: new Date(req.body.dariTanggal),
-            },
-          },
-          {
-            tanggalBeli: {
-              [Op.lte]: new Date(req.body.sampaiTanggal),
-            },
-          },
-        ],
       },
       include: [
         { model: Beli },

@@ -13,11 +13,6 @@ const HakAkses = db.define(
       defaultValue: false,
       allowNull: false,
     },
-    perubahan: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      allowNull: false,
-    },
     supplier: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -41,6 +36,11 @@ const HakAkses = db.define(
       allowNull: false,
     },
     penjualan: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    kematian: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
@@ -90,16 +90,6 @@ const HakAkses = db.define(
       allowNull: false,
     },
     setting: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      allowNull: false,
-    },
-    gantiPeriode: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      allowNull: false,
-    },
-    tutupPeriode: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
