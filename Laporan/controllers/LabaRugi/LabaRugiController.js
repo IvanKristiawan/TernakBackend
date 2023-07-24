@@ -81,15 +81,15 @@ const getLaporanLabaRugi = async (req, res) => {
     }, {});
 
     let result = [];
-    for (let beli of resultBeli) {
-      result.push(beli);
-    }
     for (let jual of resultJual) {
       result.push(jual);
     }
+    for (let beli of resultBeli) {
+      result.push(beli);
+    }
     let objectLabaRugi = {
       nama: "LABA RUGI",
-      jumlah: result[1].jumlah - result[0].jumlah,
+      jumlah: result[0].jumlah - result[1].jumlah,
     };
     result.push(objectLabaRugi);
 
